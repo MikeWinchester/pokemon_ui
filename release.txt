@@ -1,0 +1,12 @@
+sudo docker buildx build --platform linux/amd64 -t pokeui:latest . --load
+
+sudo docker run -d -p 3000:3000 --name pokeui-container pokeui:latest
+
+sudo az login
+sudo az acr login --name acrpokequeuedevv1
+
+sudo docker tag pokeui:latest acrpokequeuedevv1.azurecr.io/pokeui:latest
+sudo docker tag pokeui:latest acrpokequeuedevv1.azurecr.io/pokeui:0.1.0
+
+sudo docker push acrpokequeuedevv1.azurecr.io/pokeui:latest
+sudo docker push acrpokequeuedevv1.azurecr.io/pokeui:0.1.0
